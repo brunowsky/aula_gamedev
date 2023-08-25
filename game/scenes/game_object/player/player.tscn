@@ -1,0 +1,149 @@
+[gd_scene load_steps=11 format=3 uid="uid://dvkutwb3tv7df"]
+
+[ext_resource type="PackedScene" uid="uid://bgav57rrl566d" path="res://scenes/ability/sword_ability_controller/sword_ability_controller.tscn" id="1_0kpgf"]
+[ext_resource type="PackedScene" uid="uid://btcc7glnd3pts" path="res://scenes/component/health_component.tscn" id="1_2wfyl"]
+[ext_resource type="Texture2D" uid="uid://c5u57rsihumd0" path="res://scenes/game_object/player/player.png" id="1_pettl"]
+[ext_resource type="PackedScene" uid="uid://b7kwrjti60w8x" path="res://scenes/ability/axe_ability_controller/axe_ability_controller.tscn" id="3_koltt"]
+
+[sub_resource type="GDScript" id="GDScript_a43ve"]
+script/source = "extends CharacterBody2D
+
+const MAX_SPEED = 125
+const ACCELERATION_SMOOTHING = 25
+
+@onready var damage_interval_timer = $DamageIntervalTimer
+@onready var health_component = $HealthComponent
+@onready var health_bar = $HealthBar
+
+var number_colliding_bodies = 0
+
+func _ready():
+	$CollisionArea2D.body_entered.connect(on_body_entered)
+	$CollisionArea2D.body_exited.connect(on_body_exited)
+	damage_interval_timer.timeout.connect(on_damage_interval_timer_timeout)
+	health_component.health_changed.connect(on_health_changed)
+	update_health_display()
+
+
+func _process(delta):
+	var movement_vector = get_movement_vector()
+	var direction = movement_vector.normalized()
+	var target_velocity = direction * MAX_SPEED
+	
+	velocity = velocity.lerp(target_velocity, 1 - exp(-delta * ACCELERATION_SMOOTHING))
+	
+	move_and_slide()
+	
+	
+func get_movement_vector():
+	var movement_vector = Vector2.ZERO
+	var x_movement = Input.get_action_strength(\"move_right\") - Input.get_action_strength(\"move_left\")
+	var y_movement = Input.get_action_strength(\"move_down\") - Input.get_action_strength(\"move_up\")
+	return Vector2(x_movement, y_movement)
+
+
+func check_deal_damage():
+	if number_colliding_bodies == 0 || !damage_interval_timer.is_stopped():
+		return
+	health_component.damage(1)
+	damage_interval_timer.start()
+
+
+func update_health_display():
+	health_bar.value = health_component.get_health_percent()
+
+
+func on_body_entered(other_body: Node2D):
+	number_colliding_bodies += 1
+	check_deal_damage()
+	
+	
+func on_body_exited(other_body: Node2D):
+	number_colliding_bodies -= 1
+	
+	
+func on_damage_interval_timer_timeout():
+	check_deal_damage()
+	
+
+func on_health_changed():
+	update_health_display()
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hv4du"]
+bg_color = Color(0.247059, 0.14902, 0.192157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5bdw4"]
+bg_color = Color(0.262745, 0.882353, 0.701961, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.247059, 0.14902, 0.192157, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kvaga"]
+radius = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c5nav"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7m76x"]
+radius = 5.0
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 0
+motion_mode = 1
+script = SubResource("GDScript_a43ve")
+
+[node name="HealthComponent" parent="." instance=ExtResource("1_2wfyl")]
+
+[node name="AbilityManager" type="Node" parent="."]
+
+[node name="SwordAbilityController" parent="AbilityManager" instance=ExtResource("1_0kpgf")]
+
+[node name="AxeAbilityController" parent="AbilityManager" instance=ExtResource("3_koltt")]
+
+[node name="DamageIntervalTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(32, 6)
+offset_left = -16.0
+offset_top = -24.0
+offset_right = 16.0
+offset_bottom = -18.0
+pivot_offset = Vector2(16, 3)
+theme_override_styles/background = SubResource("StyleBoxFlat_hv4du")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5bdw4")
+max_value = 1.0
+value = 0.5
+show_percentage = false
+
+[node name="PickupArea2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea2D"]
+visible = false
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_kvaga")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_pettl")
+offset = Vector2(0, -8)
+
+[node name="CollisionArea2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea2D"]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_c5nav")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_7m76x")

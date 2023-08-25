@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://nih0be5a8xce"]
+
+[sub_resource type="GDScript" id="GDScript_xuarf"]
+script/source = "extends CanvasLayer
+
+@export var arena_time_manager: Node
+@onready var label = %Label
+
+func _process(delta):
+	if arena_time_manager == null:
+		return
+		
+	var time_elapsed = arena_time_manager.get_time_elapsed()
+	label.text = format_seconds_to_string(time_elapsed)
+	
+
+func format_seconds_to_string(seconds: float):
+	var minutes = floor(seconds / 60)
+	var remaining_seconds = seconds - (minutes * 60)
+	return str(minutes) + \":\" + (\"%02d\" % (remaining_seconds))
+"
+
+[node name="ArenaTimeUI" type="CanvasLayer"]
+script = SubResource("GDScript_xuarf")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_top = 8
+
+[node name="Label" type="Label" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "test"
