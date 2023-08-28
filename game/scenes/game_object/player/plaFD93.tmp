@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dvkutwb3tv7df"]
+[gd_scene load_steps=10 format=3 uid="uid://dvkutwb3tv7df"]
 
 [ext_resource type="PackedScene" uid="uid://bgav57rrl566d" path="res://scenes/ability/sword_ability_controller/sword_ability_controller.tscn" id="1_0kpgf"]
 [ext_resource type="PackedScene" uid="uid://btcc7glnd3pts" path="res://scenes/component/health_component.tscn" id="1_2wfyl"]
@@ -13,12 +13,9 @@ const ACCELERATION_SMOOTHING = 25
 @onready var damage_interval_timer = $DamageIntervalTimer
 @onready var health_component = $HealthComponent
 @onready var health_bar = $HealthBar
-@onready var abilities = $Abilities
-@onready var animation_player = $AnimationPlayer
-@onready var visuals = $Visuals
+@onready var abilities = $AbilityManager
 
 var number_colliding_bodies = 0
-
 
 func _ready():
 	$CollisionArea2D.body_entered.connect(on_body_entered)
@@ -37,15 +34,6 @@ func _process(delta):
 	velocity = velocity.lerp(target_velocity, 1 - exp(-delta * ACCELERATION_SMOOTHING))
 	
 	move_and_slide()
-	
-	if movement_vector.x != 0 || movement_vector.y != 0:
-		animation_player.play(\"walk\")
-	else:
-		animation_player.play(\"RESET\")
-		
-	var move_sign = sign(movement_vector.x)
-	if move_sign != 0:
-		visuals.scale = Vector2(move_sign, 1)
 	
 	
 func get_movement_vector():
@@ -94,91 +82,6 @@ func on_ability_upgrade_added(ability_upgrade: AbilityUpgrade, current_upgrades:
 	
 "
 
-[sub_resource type="Animation" id="Animation_6v0r8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/Sprite2D:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/Sprite2D:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_ryp12"]
-resource_name = "walk"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = false
-tracks/0/path = NodePath("Visuals/Sprite2D:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -2), Vector2(0, 4.76837e-07)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/Sprite2D:rotation")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3, 0.5),
-"transitions": PackedFloat32Array(1, 2, 2, -0.5),
-"update": 0,
-"values": [0.0, -0.261799, 0.261799, 0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = false
-tracks/2/path = NodePath("Visuals/Sprite2D:scale")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(0.784584),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hrr2s"]
-_data = {
-"RESET": SubResource("Animation_6v0r8"),
-"walk": SubResource("Animation_ryp12")
-}
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hv4du"]
 bg_color = Color(0.247059, 0.14902, 0.192157, 1)
 
@@ -203,11 +106,6 @@ radius = 5.0
 collision_layer = 0
 motion_mode = 1
 script = SubResource("GDScript_a43ve")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_hrr2s")
-}
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_2wfyl")]
 
@@ -242,9 +140,7 @@ visible = false
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_kvaga")
 
-[node name="Visuals" type="Node2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_pettl")
 offset = Vector2(0, -8)
 
