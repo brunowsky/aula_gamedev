@@ -1,5 +1,7 @@
 extends Node
 
+# Known bugs: Spawning axe damage upgrade without picking the axe weapon
+
 @export var end_screen_scene: PackedScene
 
 

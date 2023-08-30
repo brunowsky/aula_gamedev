@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://d22yht8mivmg4"]
+
+[ext_resource type="Script" path="res://scenes/ui/debug.gd" id="1_6h4vr"]
+
+[node name="Debug" type="CanvasLayer"]
+script = ExtResource("1_6h4vr")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DescriptionLabel" type="Label" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "test"
+
+[node name="DebugLabel" type="Label" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "teste"
