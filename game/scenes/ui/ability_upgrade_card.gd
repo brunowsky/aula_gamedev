@@ -1,21 +1,15 @@
 extends PanelContainer
 
-signal selected
-
-@onready var name_label: Label = %NameLabel
-@onready var description_label: Label = %DescriptionLabel
+@onready var description_label = %DescriptionLabel
+@onready var debug_item_label = %DebugItemLabel
 
 
 func _ready():
-	gui_input.connect(on_gui_input)
+	if description_label == null:
+		print("Labels are not properly initialized.")
+		return
+		
 
-
-func set_ability_upgrade(upgrade: AbilityUpgrade):
-	name_label.text = upgrade.name
-	description_label.text = upgrade.description
-
-
-func on_gui_input(event: InputEvent):
-	if event.is_action_pressed("left_click"):
-		selected.emit()
-	
+func set_output(item):
+	description_label.text = item.description
+	debug_item_label.text = item.debug_item
