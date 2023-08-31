@@ -1,21 +1,26 @@
 [gd_scene load_steps=2 format=3 uid="uid://kvvevdokw44l"]
 
-[ext_resource type="Script" path="res://scenes/ui/ability_upgrade_card.gd" id="1_p4x6b"]
+[ext_resource type="Script" path="res://scenes/ui/debug_item.gd" id="1_vbj0g"]
 
 [node name="DebugItem" type="PanelContainer"]
-custom_minimum_size = Vector2(120, 150)
-script = ExtResource("1_p4x6b")
+offset_left = 5.0
+offset_right = 135.0
+offset_bottom = 25.0
+size_flags_vertical = 4
+script = ExtResource("1_vbj0g")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="DescriptionLabel" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "test"
+text = "DebugLabel"
+vertical_alignment = 1
 
 [node name="DebugItemLabel" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Write some description here"
-autowrap_mode = 2
+size_flags_horizontal = 0
+text = "DebugItem"
+vertical_alignment = 1
