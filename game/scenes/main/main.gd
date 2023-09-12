@@ -1,7 +1,7 @@
 extends Node
 
 # Known bugs: Spawning axe damage upgrade without picking the axe weapon
-
+# Having to insert hit_flash_component_material.tscn to the enemies everytime
 @export var end_screen_scene: PackedScene
 
 
