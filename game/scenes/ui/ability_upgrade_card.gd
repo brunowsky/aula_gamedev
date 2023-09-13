@@ -8,6 +8,13 @@ signal selected
 
 func _ready():
 	gui_input.connect(on_gui_input)
+	mouse_entered.connect(on_mouse_entered)
+
+
+func play_in(delay: float = 0):
+	modulate = Color.TRANSPARENT
+	await get_tree().create_timer(delay).timeout
+	$AnimationPlayer.play("in")
 
 
 func set_ability_upgrade(upgrade: AbilityUpgrade):
@@ -18,3 +25,7 @@ func set_ability_upgrade(upgrade: AbilityUpgrade):
 func on_gui_input(event: InputEvent):
 	if event.is_action_pressed("left_click"):
 		selected.emit()
+
+
+func on_mouse_entered():
+	$HoverAnimationPlayer.play("hover")

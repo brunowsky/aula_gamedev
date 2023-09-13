@@ -57,6 +57,7 @@ libraries = {
 texture = ExtResource("1_30yfg")
 
 [node name="HitBoxComponent" parent="." instance=ExtResource("3_jamsd")]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 shape = SubResource("CircleShape2D_oaumv")

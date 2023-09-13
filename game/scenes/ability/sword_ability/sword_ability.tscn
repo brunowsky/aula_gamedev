@@ -111,6 +111,7 @@ _data = {
 script = ExtResource("1_dpu8u")
 
 [node name="HitBoxComponent" parent="." instance=ExtResource("1_qdrfs")]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 position = Vector2(15, -4)
