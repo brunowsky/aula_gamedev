@@ -1,13 +1,61 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqe5qfh7ihcmr"]
+[gd_scene load_steps=7 format=3 uid="uid://cqe5qfh7ihcmr"]
 
 [ext_resource type="Script" path="res://scenes/ui/upgrade_screen.gd" id="1_547lt"]
 [ext_resource type="PackedScene" uid="uid://bdk1ti2533pb3" path="res://scenes/ui/ability_upgrade_card.tscn" id="1_bl5ks"]
 
+[sub_resource type="Animation" id="Animation_it4ev"]
+resource_name = "OUT"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3u2ce"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_ht5kr"]
 resource_name = "in"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_to5ku"]
 _data = {
+"OUT": SubResource("Animation_it4ev"),
+"RESET": SubResource("Animation_3u2ce"),
 "in": SubResource("Animation_ht5kr")
 }
 
@@ -17,6 +65,7 @@ script = ExtResource("1_547lt")
 upgrade_card_scene = ExtResource("1_bl5ks")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "in"
 libraries = {
 "": SubResource("AnimationLibrary_to5ku")
 }
