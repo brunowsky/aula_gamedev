@@ -1,9 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://dvkutwb3tv7df"]
+[gd_scene load_steps=20 format=3 uid="uid://dvkutwb3tv7df"]
 
 [ext_resource type="PackedScene" uid="uid://bgav57rrl566d" path="res://scenes/ability/sword_ability_controller/sword_ability_controller.tscn" id="1_0kpgf"]
 [ext_resource type="PackedScene" uid="uid://btcc7glnd3pts" path="res://scenes/component/health_component.tscn" id="1_2wfyl"]
 [ext_resource type="PackedScene" uid="uid://bnmrtlxnbrba4" path="res://scenes/component/velocity_component.tscn" id="1_5u4es"]
 [ext_resource type="Texture2D" uid="uid://c5u57rsihumd0" path="res://scenes/game_object/player/player.png" id="1_pettl"]
+[ext_resource type="PackedScene" uid="uid://dapns2qr3ljfw" path="res://scenes/component/random_stream_player_2d_component.tscn" id="4_ssi5l"]
+[ext_resource type="AudioStream" uid="uid://jwfjb0j548wh" path="res://assets/audio/impactMining_000.ogg" id="5_51yfb"]
+[ext_resource type="AudioStream" uid="uid://1bbnvptcox" path="res://assets/audio/impactMining_001.ogg" id="6_bve78"]
+[ext_resource type="AudioStream" uid="uid://dipdjtdsf8o4e" path="res://assets/audio/impactMining_002.ogg" id="7_lybxl"]
+[ext_resource type="AudioStream" uid="uid://byn6xxt2w6nbl" path="res://assets/audio/impactMining_003.ogg" id="8_guyd5"]
+[ext_resource type="AudioStream" uid="uid://cstrt5agcgds5" path="res://assets/audio/impactMining_004.ogg" id="9_o2mv3"]
 
 [sub_resource type="GDScript" id="GDScript_a43ve"]
 script/source = "extends CharacterBody2D
@@ -82,6 +88,7 @@ func on_damage_interval_timer_timeout():
 func on_health_changed():
 	GameEvents.emit_player_damaged()
 	update_health_display()
+	$HitRandomStreamPlayerComponent.play_random()
 
 
 func on_ability_upgrade_added(ability_upgrade: AbilityUpgrade, current_upgrades: Dictionary):
@@ -219,6 +226,9 @@ acceleration = 25.0
 [node name="Abilities" type="Node" parent="."]
 
 [node name="SwordAbilityController" parent="Abilities" instance=ExtResource("1_0kpgf")]
+
+[node name="HitRandomStreamPlayerComponent" parent="." instance=ExtResource("4_ssi5l")]
+streams = Array[AudioStream]([ExtResource("5_51yfb"), ExtResource("6_bve78"), ExtResource("7_lybxl"), ExtResource("8_guyd5"), ExtResource("9_o2mv3")])
 
 [node name="DamageIntervalTimer" type="Timer" parent="."]
 wait_time = 0.5

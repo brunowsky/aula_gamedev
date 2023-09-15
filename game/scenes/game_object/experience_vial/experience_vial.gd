@@ -20,7 +20,6 @@ func tween_collect(percent: float, start_position: Vector2):
 	var target_rotation = direction_from_start.angle() + deg_to_rad(90)
 	rotation = lerp_angle(rotation, target_rotation, 1 - exp(-2 * get_process_delta_time())) # Smoothly interpolating
 
-
 	
 func collect():
 	GameEvents.emit_experience_vial_collected(1)
@@ -40,4 +39,5 @@ func on_area_entered(other_area: Area2D):
 	tween.tween_property(sprite, "scale", Vector2.ZERO, 0.05).set_delay(.45) # Wait .45 seconds before animating the property
 	tween.chain() # Wait for all the tweens before the .chain to finish before going to the next tweens
 	tween.tween_callback(collect)
-
+	
+	$RandomStreamPlayer2DComponent.play_random()
