@@ -1,7 +1,7 @@
 extends Node
 
 # Known bugs: Having to insert hit_flash_component_material.tscn to the enemies everytime
-
+# Maybe can be fixed if using the entire folder, not only game folder (doesnt make sense)? maybe some shader config isnt going through git
 @export var end_screen_scene: PackedScene
 
 
