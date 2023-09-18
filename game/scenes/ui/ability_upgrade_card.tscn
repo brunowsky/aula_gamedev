@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=3 uid="uid://bdk1ti2533pb3"]
 
 [ext_resource type="Script" path="res://scenes/ui/ability_upgrade_card.gd" id="1_v3mtj"]
-[ext_resource type="PackedScene" path="res://scenes/component/random_stream_player_component.tscn" id="2_qcstx"]
+[ext_resource type="PackedScene" uid="uid://vrstny0wk3cr" path="res://scenes/component/random_stream_player_component.tscn" id="2_qcstx"]
 [ext_resource type="AudioStream" uid="uid://bao713l5hc7ig" path="res://assets/audio/switch1.ogg" id="3_4v7jt"]
 [ext_resource type="AudioStream" uid="uid://duieqect7gf1u" path="res://assets/audio/switch2.ogg" id="4_j86rf"]
 [ext_resource type="AudioStream" uid="uid://dqvywdc2ekj2d" path="res://assets/audio/switch3.ogg" id="5_ojq3m"]
@@ -246,8 +246,7 @@ theme_type_variation = &"AlternatePanelContainer"
 [node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(0.14902, 0.168627, 0.266667, 1)
-theme_override_constants/outline_size = 8
+theme_type_variation = &"BlueOutlineLabel"
 theme_override_font_sizes/font_size = 32
 text = "test"
 horizontal_alignment = 1
@@ -257,8 +256,6 @@ autowrap_mode = 2
 [node name="DescriptionLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0.14902, 0.168627, 0.266667, 1)
-theme_override_colors/font_outline_color = Color(0.14902, 0.168627, 0.266667, 1)
-theme_override_constants/outline_size = 8
+theme_type_variation = &"BlueOutlineLabel"
 text = "Write some description here"
 autowrap_mode = 2

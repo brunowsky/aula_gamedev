@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://btcc7glnd3pts" path="res://scenes/component/health_component.tscn" id="1_2wfyl"]
 [ext_resource type="PackedScene" uid="uid://bnmrtlxnbrba4" path="res://scenes/component/velocity_component.tscn" id="1_5u4es"]
 [ext_resource type="Texture2D" uid="uid://c5u57rsihumd0" path="res://scenes/game_object/player/player.png" id="1_pettl"]
-[ext_resource type="PackedScene" path="res://scenes/component/random_stream_player_2d_component.tscn" id="4_ssi5l"]
+[ext_resource type="PackedScene" uid="uid://dapns2qr3ljfw" path="res://scenes/component/random_stream_player_2d_component.tscn" id="4_ssi5l"]
 [ext_resource type="AudioStream" uid="uid://jwfjb0j548wh" path="res://assets/audio/impactMining_000.ogg" id="5_51yfb"]
 [ext_resource type="AudioStream" uid="uid://1bbnvptcox" path="res://assets/audio/impactMining_001.ogg" id="6_bve78"]
 [ext_resource type="AudioStream" uid="uid://dipdjtdsf8o4e" path="res://assets/audio/impactMining_002.ogg" id="7_lybxl"]
