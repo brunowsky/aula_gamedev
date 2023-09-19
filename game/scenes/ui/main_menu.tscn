@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="1_7iwln"]
 [ext_resource type="TileSet" uid="uid://cmm5jciuibhlx" path="res://resources/tileset.tres" id="2_m77bb"]
 [ext_resource type="PackedScene" uid="uid://cpxch8eyf3eeb" path="res://scenes/ui/vignette.tscn" id="2_pwi70"]
-[ext_resource type="PackedScene" uid="uid://c6lf8ilk4vr3" path="res://scenes/ui/sound_button.tscn" id="3_jffxu"]
+[ext_resource type="PackedScene" path="res://scenes/ui/sound_button.tscn" id="3_jffxu"]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_7iwln")
