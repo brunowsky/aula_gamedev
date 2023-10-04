@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bb4yi4cbkkrdm" path="res://scenes/component/vial_drop_component.tscn" id="4_4axld"]
 [ext_resource type="Script" path="res://scenes/component/hurt_box_component.gd" id="4_pwa3f"]
 [ext_resource type="PackedScene" uid="uid://dio5l1uvd5ycy" path="res://scenes/component/hit_flash_component.tscn" id="5_mjktp"]
-[ext_resource type="PackedScene" path="res://scenes/component/random_stream_player_2d_component.tscn" id="7_jomfo"]
+[ext_resource type="PackedScene" uid="uid://dapns2qr3ljfw" path="res://scenes/component/random_stream_player_2d_component.tscn" id="7_jomfo"]
 [ext_resource type="AudioStream" uid="uid://dcf4u2cniyi0r" path="res://assets/audio/footstep_carpet_000.ogg" id="8_6d6sp"]
 [ext_resource type="AudioStream" uid="uid://iaymk1x3n5jg" path="res://assets/audio/footstep_carpet_001.ogg" id="9_0rsxq"]
 [ext_resource type="AudioStream" uid="uid://cpgvpibxbd2ec" path="res://assets/audio/footstep_carpet_002.ogg" id="10_6xvc6"]

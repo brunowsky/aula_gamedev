@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c5kdq01c14f4f"]
 
 [ext_resource type="Script" path="res://scenes/ui/pause_menu.gd" id="1_o507r"]
-[ext_resource type="PackedScene" path="res://scenes/ui/sound_button.tscn" id="3_0tvn4"]
+[ext_resource type="PackedScene" uid="uid://c6lf8ilk4vr3" path="res://scenes/ui/sound_button.tscn" id="3_0tvn4"]
 
 [sub_resource type="Animation" id="Animation_n8wkd"]
 length = 0.001

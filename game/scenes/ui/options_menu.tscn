@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/ui/options_menu.gd" id="1_4rpxd"]
 [ext_resource type="PackedScene" uid="uid://cpxch8eyf3eeb" path="res://scenes/ui/vignette.tscn" id="2_eaimo"]
 [ext_resource type="TileSet" uid="uid://cmm5jciuibhlx" path="res://resources/tileset.tres" id="2_fvtce"]
-[ext_resource type="PackedScene" path="res://scenes/ui/sound_button.tscn" id="3_almj1"]
+[ext_resource type="PackedScene" uid="uid://c6lf8ilk4vr3" path="res://scenes/ui/sound_button.tscn" id="3_almj1"]
 
 [node name="OptionsMenu" type="CanvasLayer"]
 layer = 2
