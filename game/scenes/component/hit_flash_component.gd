@@ -15,10 +15,13 @@ func _ready():
 func on_health_changed():
 	if hit_flash_tween != null && hit_flash_tween.is_valid():
 		hit_flash_tween.kill()
-		
-	(sprite.material as ShaderMaterial).set_shader_parameter("lerp_percent", 1.0) # Initialized to value 1 to lerp to 0
+ 
+	change_sprite_material_lerp_percentage(1.0)
+ 
 	hit_flash_tween = create_tween()
-	hit_flash_tween.tween_property(sprite.material, "shader_parameter/lerp_percent", 0.0, .25)\
-	.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC) # The property exists in the material not in the sprite
-	
+	hit_flash_tween.tween_method(change_sprite_material_lerp_percentage, 1.0, 0.0, .4)
+ 
+ 
+func change_sprite_material_lerp_percentage(val: float):
+	(sprite.material as ShaderMaterial).set_shader_parameter("lerp_percent", val)
 	
