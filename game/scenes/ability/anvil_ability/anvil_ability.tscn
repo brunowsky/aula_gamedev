@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://bvxcqp5iku0x4"]
+
+[ext_resource type="Texture2D" uid="uid://d1l1ntf4v4isi" path="res://scenes/ability/anvil_ability/anvil.png" id="1_lwom3"]
+[ext_resource type="Script" path="res://scenes/component/hit_box_component.gd" id="2_dhwq2"]
+
+[sub_resource type="Animation" id="Animation_uc1o4"]
+resource_name = "default"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.25),
+"transitions": PackedFloat32Array(2.14355, 1, 1),
+"update": 0,
+"values": [Vector2(0, -96), Vector2(0, 0), Vector2(0, -4)]
+}
+
+[sub_resource type="Animation" id="Animation_rs23y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qbxgl"]
+_data = {
+"RESET": SubResource("Animation_rs23y"),
+"default": SubResource("Animation_uc1o4")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jhfie"]
+radius = 24.0
+
+[node name="AnvilAbility" type="Node2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "default"
+libraries = {
+"": SubResource("AnimationLibrary_qbxgl")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_lwom3")
+offset = Vector2(0, -7)
+
+[node name="HitBoxComponent" type="Area2D" parent="."]
+script = ExtResource("2_dhwq2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_jhfie")
+disabled = true
