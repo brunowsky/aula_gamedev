@@ -36,7 +36,7 @@ func update_progress():
 		MetaProgression.save_data["meta_upgrades"][upgrade.id] = {"quantity": 0}
 		count_label.text = "x0"
 # Possivelmente a mesma coisa de cima
-	var current_quantity = 0
+	var current_quantity = MetaProgression.save_data["meta_upgrades"][upgrade.id]["quantity"]
 #	if MetaProgression.save_data["meta_upgrades"][upgrade.id]["quantity"].has(upgrade.id):
 #		current_quantity = MetaProgression.save_data["meta_upgrades"][upgrade.id]["quantity"]
 		
@@ -49,7 +49,7 @@ func update_progress():
 	if is_maxed:
 		purchase_button.text = "Max"
 	progress_label.text = str(currency) + "/" + str(upgrade.experience_cost)
-	count_label.text = "x%d" % MetaProgression.save_data["meta_upgrades"][upgrade.id]["quantity"]
+	count_label.text = "x%d" % current_quantity
 
 
 func select_card():
