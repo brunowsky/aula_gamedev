@@ -3,7 +3,7 @@ extends Node
 signal experience_updated(current_experience: float, target_experience: float)
 signal level_up(new_level: int)
 
-const TARGET_EXPERIENCE_GROWTH = 1.5
+const TARGET_EXPERIENCE_GROWTH = 5
 
 @onready var debug = $"../Debug"
 
@@ -55,7 +55,7 @@ func increment_experience(number: float):
 	while current_experience >= target_experience:
 		current_level += 1
 		current_experience -= target_experience
-		target_experience *= TARGET_EXPERIENCE_GROWTH
+		target_experience += TARGET_EXPERIENCE_GROWTH
 		update_debug_dict()
 		experience_updated.emit(current_experience, target_experience)
 		level_up.emit(current_level)
